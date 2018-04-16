@@ -5,9 +5,9 @@
 void *func(void *arg);
 void *func1(void *ars);
 void *func2(void *art);
-int bt1=1;
-int bt2=1;
-int bt3=1;
+int bt1;
+int bt2;
+int bt3;
 int i;
 int s[100];
 pthread_t p1,p2,p3;
@@ -18,10 +18,13 @@ int main()
 printf("\nProcess P1 has highest Priority and It's given lottery tickets from 1 to 50\n");
 printf("\nProcess P2 has priority higher than P3 but lower P1 and It's given lottery tickets from 51 to 90\n");
 printf("\nProcess P3 has lowest priority among them and It's given lottery tickets from 90 to 100\n");
-printf("\nInitially process P1 burst time is %d\n",bt1);
-printf("\nInitially process P2 burst time is %d\n",bt2);
-printf("\nInitially process P3 burst time is %d\n",bt3);
 printf("\nTime slice has been set to 1\n");
+printf("\n Enter the burst time for process P1- ");
+scanf("%d",&bt1);
+printf("\nEnter the burst time for process P2- ");
+scanf("%d",&bt2);
+printf("\nEnter the burst time for process P3- ");
+scanf("%d",&bt3);
 sleep(2);
 starter();
 
@@ -36,19 +39,19 @@ int a=rand()%100;
 sleep(1);
 printf("\n Lottery Ticket Generted is :  %d \n",a);
 
-if(a>0 && a<49)
+if(a>0 && a<51)
 {
 pthread_create(&p1,NULL,func,(void *)a);
 
 pthread_join(p1,NULL);
 }
-else if(a>50 && a<90)
+else if(a>50 && a<91)
 {
 pthread_create(&p2,NULL,func1,(void *)a);
 
 pthread_join(p2,NULL);
 }
-else
+else if(a>90 && a<100)
 {
 pthread_create(&p3,NULL,func2,(void *)a);
 
